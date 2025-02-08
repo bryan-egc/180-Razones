@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>200 Razones por las que te Amo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6e6;
+            color: #ff3366;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 90%;
+            margin: 20px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .photo-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .photo-card img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+        }
+        .btn {
+            background-color: #ff3366;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+            margin-top: 15px;
+            width: 90%;
+        }
+        .btn:hover {
+            background-color: #cc0033;
+        }
+        .grid-container {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 10px;
+        }
+        .card {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .card:hover, .card:focus {
+            background-color: #ff3366;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="tu-cancion.mp3" type="audio/mpeg">
+        Tu navegador no soporta la reproducción de audio.
+    </audio>
+    
+    <div class="container" id="intro">
+        <div class="photo-card">
+            <img src="tu-foto.jpg" alt="Nuestra Foto">
+            <button class="btn" onclick="startMusicAndShowReasons()">Descubre las razones por las que te amo</button>
+        </div>
+    </div>
+    
+    <div class="container grid-container" id="reasons-container"></div>
+    
+    <script>
+        const reasons = [
+            "Me encanta cómo sonríes cuando ves algo que te gusta.",
+            "Tu risa es mi sonido favorito.",
+            "Siempre sabes cómo hacerme sentir mejor.",
+            "Me inspiras a ser una mejor persona.",
+            "La forma en que me miras hace que mi día sea mejor.",
+            "Amo nuestras conversaciones profundas y tontas por igual.",
+            "Eres mi lugar seguro.",
+            "Tu paciencia conmigo es increíble.",
+            "Haces que cada día sea especial.",
+            "La forma en que me abrazas me da paz.",
+        ];
+        
+        function startMusicAndShowReasons() {
+            document.getElementById("intro").style.display = "none";
+            const audio = document.getElementById("background-music");
+            audio.play().catch(error => console.log("El usuario debe interactuar con la página para iniciar la música."));
+            const container = document.getElementById("reasons-container");
+            container.style.display = "grid";
+            
+            reasons.forEach((reason, index) => {
+                const card = document.createElement("div");
+                card.classList.add("card");
+                card.innerText = `Razón ${index + 1}`;
+                card.dataset.reason = reason;
+                
+                card.addEventListener("mouseover", function() {
+                    this.innerText = this.dataset.reason;
+                });
+                card.addEventListener("mouseout", function() {
+                    this.innerText = `Razón ${index + 1}`;
+                });
+                
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>
